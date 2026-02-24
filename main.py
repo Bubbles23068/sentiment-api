@@ -19,10 +19,7 @@ def analyze_comment(data: CommentRequest):
     try:
         response = client.responses.create(
             model="gpt-4.1-mini",
-            messages=[
-                {"role": "system", "content": "Analyze sentiment and respond using JSON only."},
-                {"role": "user", "content": data.comment}
-            ],
+            input=data.comment,
             response_format={
                 "type": "json_schema",
                 "json_schema": {
@@ -40,7 +37,8 @@ def analyze_comment(data: CommentRequest):
                                 "maximum": 5
                             }
                         },
-                        "required": ["sentiment", "rating"]
+                        "required": ["sentiment", "rating"],
+                        "additionalProperties": False
                     }
                 }
             }
