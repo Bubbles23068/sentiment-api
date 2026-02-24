@@ -26,8 +26,7 @@ def analyze_comment(data: CommentRequest):
             input=data.comment,
             response_format=SentimentResponse
         )
-
         return response.output_parsed
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))))
+        raise HTTPException(status_code=500, detail=str(e))
